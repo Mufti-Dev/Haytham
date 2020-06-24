@@ -1,2 +1,2 @@
 # Haytham
-C++ and bit of math
+C++ 11 and higher
