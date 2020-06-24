@@ -1,6 +1,3 @@
-// Print_Permutation.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 // Problem Statement: Print all permutations of a number N greater than itself
 // This problem can be solved easily by using C++ 11
 /* 1. Convert the input number to string by using std::to_string
@@ -20,9 +17,24 @@ void printPermutation(int N)
     }
 }
 
+// Permutaion of string and prints
+// Example: If Input string is ABC, then out put must be ABC, ACB, BAC, BCA, CAB, CBA
+void print_all_permutation_of_string(std::string &sInput)
+{
+    do
+    {
+        std::cout << sInput << "\n";
+    } while (std::next_permutation(sInput.begin(), sInput.end()));
+}
+
 int main()
 {
-    int abc = 314;
-    printPermutation(abc);
+    int nData = 314;
+    printPermutation(nData);
+
+    std::cout << "String Permutations: " << std::endl;
+    std::string sData("ABC");
+    print_all_permutation_of_string(sData);
+
     return 0;
 }
