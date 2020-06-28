@@ -9,7 +9,7 @@
 #include <list>
 
 // The below version doen't work for list(std::list) as iterator for list is bidirectional hence += won't work.
-// Also not very clean perse. Creating a new version of getSlicedData. Code gets much simpler.
+// Also not very clean perse. Updated getSlicedData(). Code gets more simpler to maintain.
 //template<typename T>
 //T getSlicedData(T &origContainer, size_t nBegin, size_t nEnd)
 //{
@@ -46,11 +46,12 @@ int main()
     std::list<int> listOfInts({ 2, 8, 7, 5, 3, 1, 4 });
     std::list<int> list = getSlicedData(listOfInts, 1, 5);
 
-    // Print sliced data from vector
+    // Print sliced data from list
     for (int data : list)
         std::cout << data << " ";
-
     std::cout << std::endl;
+
+
     return 1;
 }
 
