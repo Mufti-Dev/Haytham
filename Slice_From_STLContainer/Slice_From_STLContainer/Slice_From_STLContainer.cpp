@@ -6,14 +6,24 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <list>
+
+// The below version doen't work for list(std::list) as iterator for list is bidirectional hence += won't work.
+// Also not very clean perse. Creating a new version of getSlicedData. Code gets much simpler.
+//template<typename T>
+//T getSlicedData(T &origContainer, size_t nBegin, size_t nEnd)
+//{
+//    auto nIterBegin = origContainer.begin();
+//    auto nIterEnd = nIterBegin + nEnd + 1; // Inclusive last one
+//    T sliceContainer(nIterBegin + nBegin, nIterEnd);
+//
+//    return sliceContainer;
+//}
 
 template<typename T>
-T getSlicedData(T &origContainer, size_t nBegin, size_t nEnd)
+T getSlicedData(T& origContainer, size_t nBegin, size_t nEnd)
 {
-    auto nIterBegin = origContainer.begin();
-    auto nIterEnd = nIterBegin + nEnd + 1; // Inclusive last one
-    T sliceContainer(nIterBegin + nBegin, nIterEnd);
-
+    T sliceContainer(std::next(origContainer.begin(), nBegin), std::next(origContainer.begin(), nEnd+1));
     return sliceContainer;
 }
 
@@ -28,11 +38,19 @@ int main()
     std::vector<int> arr = { 1, 3, 4, 5, 6, 7, 8, 9, 10 };
     std::vector<int> ans = getSlicedData(arr, 1, 5);
 
-    // Print sliced data from string
+    // Print sliced data from vector
     for (const auto& i : ans)
         std::cout << i << ' ';
     std::cout << std::endl;
 
+    std::list<int> listOfInts({ 2, 8, 7, 5, 3, 1, 4 });
+    std::list<int> list = getSlicedData(listOfInts, 1, 5);
+
+    // Print sliced data from vector
+    for (int data : list)
+        std::cout << data << " ";
+
+    std::cout << std::endl;
     return 1;
 }
 
