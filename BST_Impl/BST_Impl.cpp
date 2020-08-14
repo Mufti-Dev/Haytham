@@ -17,8 +17,12 @@ public:
         _root = Insert(_root, Data);
     }
 
-    bool SearchNode(T Data) {
-        return Search(_root, Data);
+    Node<T>* FindNodeByData(T data) {
+        return FindNode(_root, data);
+    }
+
+    bool IsNodeData(T Data) {
+        return dataFound(_root, Data);
     }
 
     Node<T>* FindMinNode() {
@@ -55,6 +59,10 @@ public:
 
     bool isBalanced() {
         return isBalanced(_root);
+    }
+
+    Node<T>* getNextNode(Node<T>* anyNode) {
+        return getNextNode(_root, anyNode);
     }
 
     Node<T>* DeleteNode(T Data)
@@ -109,11 +117,18 @@ private:
         return true;
     }
 
-    bool Search(Node<T>* root, T data) {
+    Node<T>* FindNode(Node<T>* root, T data) {
+        if (0 == root) return root;
+        else if (data == root->data) return root;
+        else if (data <= root->data) return FindNode(root->left, data);
+        else return FindNode(root->right, data);
+    }
+
+    bool dataFound(Node<T>* root, T data) {
         if (0 == root) return false;
         else if (data == root->data) return true;
-        else if (data <= root->data) return Search(root->left, data);
-        else return Search(root->right, data);
+        else if (data <= root->data) return dataFound(root->left, data);
+        else return dataFound(root->right, data);
     }
 
     Node<T>* DeleteNode(Node<T>* pNode, T data) {
@@ -154,6 +169,26 @@ private:
         return root;
     }
 
+    Node<T>* getNextNode(Node<T>* root, Node<T>* anyNode) { /*Search for inorder successor for anyNode*/
+
+        if (NULL != anyNode->right) return FindMinOfRight(anyNode->right);
+
+        Node<T>* nextNode = NULL;
+
+        while (root != anyNode)
+        {
+            if (anyNode->data < root->data) {
+                nextNode = root;
+                root = root->left;
+            }
+            else {
+                root = root->right;
+            }
+        }
+
+        return nextNode;
+    }
+
     void deleteTree(Node<T>* treeNode) {
         if (!treeNode) return;
 
@@ -175,11 +210,12 @@ int main()
     nd.InsertNode(20);
     nd.InsertNode(25);
     nd.InsertNode(8);
+    nd.InsertNode(6);
     nd.InsertNode(12);
     nd.InsertNode(26);
 
     int number = 8;
-    if (nd.SearchNode(number)) {
+    if (nd.IsNodeData(number)) {
         std::cout << "Found..." << std::endl;
     }
     else {
@@ -191,6 +227,11 @@ int main()
 
     auto* pNodeMax = nd.FindMaxNode();
     nd.printData(pNodeMax);
+
+    auto* pNode = nd.FindNodeByData(6);
+
+    auto* pNodeNext = nd.getNextNode(pNode);
+    nd.printData(pNodeNext);
 
     auto nHeight = nd.getHeight();
     auto bBalanced = nd.isBalanced();
