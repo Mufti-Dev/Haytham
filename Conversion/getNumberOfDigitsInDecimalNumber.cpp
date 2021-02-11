@@ -3,6 +3,7 @@
 #include <cmath>
 
 int getNumberOfDigits(int nNum, int nBase){
+    if(nNum < 0) nNum = -nNum;
     int result = floor(log(nNum) / log(nBase)) + 1;
     
     return result;
