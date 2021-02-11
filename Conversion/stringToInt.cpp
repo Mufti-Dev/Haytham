@@ -14,7 +14,7 @@ int stringToInteger(std::string sNum){
 
 int main() {
     // Write C++ code here
-    std::string sNum = "999999";
+    std::string sNum = "-999999";
     std::cout << stringToInteger(sNum) << std::endl;;
     
     return 0;
