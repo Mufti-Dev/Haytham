@@ -7,7 +7,6 @@ std::vector<int> rearrangeInMaxMinOrder_Oof1space(std::vector<int> str) {
     int nLen = str.size();
     if (nLen == 0) return {};
 
-    int nBeg = 0;
     int nEnd = nLen - 1;
     int nMaxElem = str[nEnd] + 1;
 
