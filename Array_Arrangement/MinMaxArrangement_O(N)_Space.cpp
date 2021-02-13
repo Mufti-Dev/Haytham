@@ -1,5 +1,5 @@
-/* Arrange a sorted array (integers are in asceinding order) in max min pair.
-   Example: Original Array: 1,2,3,4,5,6,7,8 After arrangement array  must look like 8,1,7,2,6,3,5,4*/
+/* Arrange a sorted array (chars are in asceinding order) in max min pair.
+   Example: Original Array: a,b,c,d,e,f,g,h After arrangement array  must look like h,a,g,b,6,f,c,e,d*/
 
 /*Author: Mufti Md*/
 
