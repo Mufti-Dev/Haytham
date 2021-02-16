@@ -21,10 +21,43 @@ int getNumberFromRomanNumerals(std::string s){
     return sum;
 }
 
+/*Converts a number to roman numerals*/
+std::string getRomanNumeralsFromInteger(int num){
+    std::string result;
+    struct romanLiterals_t {int value; std::string const sLiterals;};
+    romanLiterals_t const roman[] = {
+        1000, "M", 
+         900, "CM", 
+         500, "D", 
+         400, "CD", 
+         100, "C", 
+          90, "XC", 
+          50, "L", 
+          40, "XL", 
+          10, "X", 
+           9, "IX", 
+           5, "V", 
+           4, "IV", 
+           1, "I", 
+           0, ""};
+           
+    for(romanLiterals_t const* pRd = roman; pRd->value > 0; ++pRd){
+        while(num >= pRd->value){
+            result += pRd->sLiterals;
+            num -= pRd->value;
+        }
+    }
+    
+    return result;
+}
+
 int main() {
     std::string s("MCMLXXXIV");
     std::cout << getNumberFromRomanNumerals(s) << std::endl;
-    std::string s1("MMMDCCCLXXXXVI");
+    std::string s1("MMMDCCCXCVI");
     std::cout << getNumberFromRomanNumerals(s1) << std::endl;
+    
+    // Number to roman numerals
+    std::cout << getRomanNumeralsFromInteger(3896) << std::endl;
     return 0;
 }
